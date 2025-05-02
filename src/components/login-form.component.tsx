@@ -55,12 +55,9 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
     }
 
     if (isValid) {
-      // Si hay una función onSubmit personalizada, la llamamos
       if (onSubmit) {
         onSubmit(email, password);
       }
-
-      // Llamamos a la función de login del hook
       await login(email, password);
     }
   };
