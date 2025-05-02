@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
 
-export default function BlurredContainer({
-  children,
-}: {
+interface BlurredContainerProps {
   children: ReactNode;
-}) {
+}
+
+const BlurredContainer = ({ children }: BlurredContainerProps) => {
   return (
     <Box
       sx={{
@@ -30,9 +30,9 @@ export default function BlurredContainer({
             right: 0,
             bottom: 0,
             boxShadow: `
-            inset 0 0 20px 8px white,
-            inset 0 0 30px 10px rgba(255, 255, 255, 0.8)
-          `,
+              inset 0 0 20px 8px white,
+              inset 0 0 30px 10px rgba(255, 255, 255, 0.8)
+            `,
             pointerEvents: "none",
           },
         }}
@@ -41,4 +41,6 @@ export default function BlurredContainer({
       </Box>
     </Box>
   );
-}
+};
+
+export default BlurredContainer;

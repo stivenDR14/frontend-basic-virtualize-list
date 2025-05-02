@@ -1,6 +1,6 @@
 import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import CardGenericComponent from "../components/card-generic.component";
-import LoginForm from "../components/login-form";
+import LoginForm from "../components/login-form.component";
 import BlurredContainer from "../components/blurred-container.component";
 
 export default function AuthPage() {

@@ -1,13 +1,21 @@
 import { useState } from "react";
-import { TextField, Button, Box, Typography, IconButton } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  IconButton,
+  CircularProgress,
+} from "@mui/material";
 import {
   Email,
   Lock,
   Visibility,
   VisibilityOff,
-  Login,
+  Login as LoginIcon,
 } from "@mui/icons-material";
 import { errorMessages, loginLabels } from "../utils/labels";
+import { useAuth } from "../hooks/auth.hook.tsx";
 
 interface LoginFormProps {
   onSubmit?: (email: string, password: string) => void;
@@ -20,7 +28,9 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login, isLoading, error } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let isValid = true;
 
@@ -44,8 +54,14 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
       setPasswordError("");
     }
 
-    if (isValid && onSubmit) {
-      onSubmit(email, password);
+    if (isValid) {
+      // Si hay una función onSubmit personalizada, la llamamos
+      if (onSubmit) {
+        onSubmit(email, password);
+      }
+
+      // Llamamos a la función de login del hook
+      await login(email, password);
     }
   };
 
@@ -64,7 +80,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           py: 2,
         }}
       >
-        <Login
+        <LoginIcon
           color="secondary"
           sx={{
             fontSize: 64,
@@ -94,6 +110,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           onChange={(e) => setEmail(e.target.value)}
           error={!!emailError}
           helperText={emailError}
+          disabled={isLoading}
           slotProps={{
             input: {
               startAdornment: <Email color="primary" />,
@@ -110,6 +127,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           onChange={(e) => setPassword(e.target.value)}
           error={!!passwordError}
           helperText={passwordError}
+          disabled={isLoading}
           slotProps={{
             input: {
               startAdornment: <Lock color="primary" />,
@@ -117,6 +135,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
                   edge="end"
+                  disabled={isLoading}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -131,10 +150,21 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           color="secondary"
           size="large"
           fullWidth
+          disabled={isLoading}
           sx={{ mt: 2 }}
+          startIcon={
+            isLoading ? <CircularProgress size={20} color="inherit" /> : null
+          }
         >
-          {loginLabels.button}
+          {isLoading ? loginLabels.loading : loginLabels.button}
         </Button>
+
+        {/* Mostramos el mensaje de error del formulario si existe */}
+        {error && !isLoading && (
+          <Typography color="error" variant="body2" align="center">
+            {error}
+          </Typography>
+        )}
       </Box>
     </>
   );
