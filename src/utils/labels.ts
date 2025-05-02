@@ -12,7 +12,10 @@ export const errorMessages = {
   emailInvalid: "Email inválido",
   passwordRequired: "La contraseña es requerida",
   passwordLessThan6Characters: "La contraseña debe tener al menos 6 caracteres",
-  mockError: "Hubo un error simulado, intenta de nuevo",
+  mockError: "Hubo un error simulado: intenta de nuevo",
+  mockTokenError: "Hubo un error simulado: Token inválido, recarga la página",
+  mockTokenWrongError:
+    "Hubo un error validando el token, debes volver a iniciar sesión",
 };
 
 export const successMessages = {
@@ -26,4 +29,8 @@ export const notFoundLabels = {
 
 export const loadingLabels = {
   loading: "Cargando...",
+};
+
+export const logoutButtonLabels = {
+  logout: "Salir",
 };

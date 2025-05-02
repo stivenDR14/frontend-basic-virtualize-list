@@ -1,3 +1,10 @@
+import LogoutButtonComponent from "../components/logout-button.component";
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <LogoutButtonComponent />
+      <div>HomePage</div>
+    </>
+  );
 }

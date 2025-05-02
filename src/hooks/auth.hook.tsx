@@ -16,6 +16,7 @@ export const useAuth = () => {
       setAuthData(response.token);
 
       showNotification(successMessages.loginSuccess, "success");
+      localStorage.setItem("token", response.token);
 
       setIsLoading(false);
       return true;
@@ -35,8 +36,8 @@ export const useAuth = () => {
     setIsLoading(true);
 
     try {
-      await authService.logout();
-      setAuthData("");
+      await authService.logout(() => setAuthData(""));
+
       showNotification("Sesión cerrada con éxito", "info");
       setIsLoading(false);
     } catch (error) {

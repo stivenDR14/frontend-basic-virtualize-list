@@ -9,6 +9,8 @@ import {
 } from "react";
 import { SnackbarComponent } from "../components/snackbar.component";
 import { AlertColor } from "@mui/material";
+import { authService } from "../services/auth.services";
+import { LoadingFallback } from "../components/loading-fallback.component";
 
 export type AppContextInterface = {
   authData: string;
@@ -62,10 +64,30 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
     },
     []
   );
+  const handleSetToken = (token: string) => {
+    setAuthData(token);
+  };
 
   useEffect(() => {
-    console.log("authData", authData);
-  }, [authData]);
+    const token = localStorage.getItem("token");
+    console.log("token", token);
+    setIsLoading(true);
+    if (token) {
+      authService
+        .validateToken(token, handleSetToken)
+        .finally(() => {
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setSnackbarMessage(error.message);
+          setSnackbarSeverity("error");
+          setSnackbarOpen(true);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
 
   const value = {
     authData,
@@ -81,7 +103,7 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
   return (
     <AppContext.Provider value={value}>
       <>
-        {children}
+        {isLoading ? <LoadingFallback /> : <>{children}</>}
         <SnackbarComponent
           handleCloseSnackbar={handleCloseSnackbar}
           snackbarOpen={snackbarOpen}
