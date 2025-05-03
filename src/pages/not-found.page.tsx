@@ -3,14 +3,12 @@ import { styled } from "@mui/material/styles";
 import { notFoundLabels } from "../utils/labels";
 import { useNavigate } from "react-router";
 
-// Define the blinking animation
 const blinkAnimation = keyframes`
   0% { opacity: 1; }
   50% { opacity: 0.3; }
   100% { opacity: 1; }
 `;
 
-// Styled component for the blinking exclamation mark
 const BlinkingText = styled("text")(({ theme }) => ({
   animation: `${blinkAnimation} 1.5s infinite ease-in-out`,
   fill: theme.palette.error.main,
@@ -27,14 +25,12 @@ const AlertIcon = () => {
         viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Triangle warning sign */}
         <polygon
           points="50,10 95,90 5,90"
           fill="#f8d7da"
           stroke="#d9534f"
           strokeWidth="5"
         />
-        {/* Blinking exclamation mark */}
         <BlinkingText x="43" y="75">
           !
         </BlinkingText>

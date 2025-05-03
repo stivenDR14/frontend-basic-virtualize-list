@@ -1,48 +1,38 @@
 import { ReactNode, FC } from "react";
 import { Card, CardContent, Box, useTheme, useMediaQuery } from "@mui/material";
-import {
-  AccountCircle,
-  BusinessCenter,
-  LightbulbOutlined,
-  Notifications,
-  Star,
-} from "@mui/icons-material";
+import { Star } from "@mui/icons-material";
 
 interface CardGenericProps {
   children: ReactNode;
   isSmall?: boolean;
+  ratingScore?: number;
 }
 
 const CardGenericComponent: FC<CardGenericProps> = ({
   children,
   isSmall = true,
+  ratingScore,
 }) => {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
-  const maxHeight = isMdUp ? 300 : 200;
-
-  const icons = [
-    <AccountCircle fontSize="large" />,
-    <BusinessCenter fontSize="large" />,
-    <LightbulbOutlined fontSize="large" />,
-    <Notifications fontSize="large" />,
-    <Star fontSize="large" />,
-  ];
-
-  const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+  const maxHeight = isMdUp ? 200 : 150;
+  const arrayOfStars = Array.from({ length: ratingScore ?? 0 }, (_, index) => (
+    <Star key={index} fontSize={isMdUp ? "large" : "small"} />
+  ));
 
   if (isSmall) {
     return (
       <Card
         sx={{
           display: "flex",
-          maxHeight: `${maxHeight}px`,
+          height: `${maxHeight}px`,
           width: "100%",
+          overflow: "auto",
         }}
       >
         <Box
           sx={{
-            width: "33%",
+            width: isMdUp ? "33%" : "45%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -51,14 +41,15 @@ const CardGenericComponent: FC<CardGenericProps> = ({
             p: 2,
           }}
         >
-          {randomIcon}
+          {arrayOfStars}
         </Box>
         <Box
           sx={{
-            width: "67%",
+            width: isMdUp ? "67%" : "55%",
             display: "flex",
             flexDirection: "column",
             overflow: "auto",
+            maxHeight: `${maxHeight}px`,
           }}
         >
           <CardContent
@@ -67,7 +58,6 @@ const CardGenericComponent: FC<CardGenericProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              p: 2,
               maxHeight: `${maxHeight}px`,
               overflow: "auto",
             }}

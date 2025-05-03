@@ -16,6 +16,7 @@ export const errorMessages = {
   mockTokenError: "Hubo un error simulado: Token inválido, recarga la página",
   mockTokenWrongError:
     "Hubo un error validando el token, debes volver a iniciar sesión",
+  errorEndpoint: "Hubo un error al obtener los datos, intenta de nuevo",
 };
 
 export const successMessages = {
@@ -33,4 +34,9 @@ export const loadingLabels = {
 
 export const logoutButtonLabels = {
   logout: "Salir",
+};
+
+export const virtualizedListLabels = {
+  reviews: "Puntuaciones de productos",
+  by: "Por: ",
 };

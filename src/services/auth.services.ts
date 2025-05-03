@@ -15,7 +15,7 @@ interface AuthResponse {
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const shouldFail = (): boolean => {
-  return Math.floor(Math.random() * 3) === 0;
+  return Math.floor(Math.random() * 4) === 0;
 };
 
 export const authService = {
