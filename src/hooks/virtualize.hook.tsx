@@ -40,12 +40,8 @@ export function useVirtualize<T>({
       items.length - 1,
       Math.ceil((scrollTop + containerHeight) / itemHeight) + bufferItems
     );
-    console.log("startIndex", startIndex);
-    console.log("endIndex", endIndex);
 
     const visibleItems = items.slice(startIndex, endIndex + 1);
-    console.log("visibleItems", visibleItems);
-
     setVisibleItems(visibleItems);
   }, [scrollTop, items]);
 

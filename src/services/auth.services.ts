@@ -7,6 +7,7 @@ interface LoginCredentials {
 
 interface AuthResponse {
   token: string;
+  code: number;
   user: {
     email: string;
   };
@@ -20,14 +21,21 @@ const shouldFail = (): boolean => {
 
 export const authService = {
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-    await delay(1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     if (shouldFail()) {
-      throw new Error(errorMessages.mockError);
+      return {
+        token: "",
+        code: 401,
+        user: {
+          email: credentials.email,
+        },
+      };
     }
 
     return {
       token: `token-fake-${Date.now()}`,
+      code: 200,
       user: {
         email: credentials.email,
       },

@@ -11,9 +11,7 @@ export const ratingsService = {
         return JSON.parse(ratings);
       } else {
         const response = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }?type=json_records&sql=select * from csvgetter limit 2000`
+          `${import.meta.env.VITE_API_URL}/prod/items`
         );
         if (!response) {
           throw new Error(errorMessages.errorEndpoint);

@@ -13,13 +13,18 @@ export const useAuth = () => {
 
     try {
       const response = await authService.login({ email, password });
-      setAuthData(response.token);
 
-      showNotification(successMessages.loginSuccess, "success");
-      localStorage.setItem("token", response.token);
+      if (response.code === 200) {
+        setAuthData(response.token);
 
-      setIsLoading(false);
-      return true;
+        showNotification(successMessages.loginSuccess, "success");
+        localStorage.setItem("token", response.token);
+
+        setIsLoading(false);
+        return true;
+      } else {
+        throw new Error(errorMessages.mockError);
+      }
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : errorMessages.mockError;

@@ -79,13 +79,12 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
       (config) => {
         const apiUrl = import.meta.env.VITE_API_URL;
 
-        console.log("config.url", config.url);
-        console.log("apiUrl", apiUrl);
         if (config.url && config.url.startsWith(apiUrl)) {
           config.headers = {
             ...config.headers,
-            Authentication: `Bearer ${authData}`,
-          } as unknown as AxiosRequestHeaders;
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authData}`,
+          } as AxiosRequestHeaders;
         }
 
         return config;
@@ -99,7 +98,6 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     setIsLoading(true);
     if (token) {
       authService
