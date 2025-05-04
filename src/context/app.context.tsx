@@ -49,7 +49,7 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
   const [interceptorLayer, setInterceptorLayer] = useState<number>();
 
   const handleCloseSnackbar = (
-    event?: SyntheticEvent | Event,
+    _event?: SyntheticEvent | Event,
     reason?: string
   ) => {
     if (reason === "clickaway") {

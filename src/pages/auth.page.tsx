@@ -30,7 +30,7 @@ export default function AuthPage() {
           >
             <BlurredContainer>
               <img
-                src="/images/listas-image.webp"
+                src={`${import.meta.env.BASE_URL}images/listas-image.webp`}
                 alt="Login illustration"
                 style={{
                   maxWidth: "100%",
