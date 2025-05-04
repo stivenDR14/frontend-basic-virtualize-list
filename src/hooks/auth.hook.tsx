@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { authService } from "../services/auth.services";
 import { AppContext } from "../context/app.context";
-import { errorMessages, successMessages } from "../utils/labels";
+import { errorMessages, loginLabels, successMessages } from "../utils/labels";
 export const useAuth = () => {
   const { setAuthData, showNotification } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,11 +38,11 @@ export const useAuth = () => {
     try {
       await authService.logout(() => setAuthData(""));
 
-      showNotification("Sesión cerrada con éxito", "info");
+      showNotification(loginLabels.logoutSuccess, "success");
       setIsLoading(false);
     } catch (error) {
       console.error("Error during logout:", error);
-      showNotification("Error al cerrar sesión", "error");
+      showNotification(errorMessages.logoutError, "error");
       setIsLoading(false);
     }
   };

@@ -32,20 +32,21 @@ const CardGenericComponent: FC<CardGenericProps> = ({
       >
         <Box
           sx={{
-            width: isMdUp ? "33%" : "45%",
+            width: isMdUp ? "33%" : "25%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: theme.palette.primary.light,
+            backgroundColor: theme.palette.secondary.main,
             color: theme.palette.primary.contrastText,
             p: 2,
+            zoom: isMdUp ? 1 : 0.5,
           }}
         >
           {arrayOfStars}
         </Box>
         <Box
           sx={{
-            width: isMdUp ? "67%" : "55%",
+            width: isMdUp ? "67%" : "75%",
             display: "flex",
             flexDirection: "column",
             overflow: "auto",
@@ -57,7 +58,7 @@ const CardGenericComponent: FC<CardGenericProps> = ({
               flex: "1 0 auto",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "flex-start",
               maxHeight: `${maxHeight}px`,
               overflow: "auto",
             }}

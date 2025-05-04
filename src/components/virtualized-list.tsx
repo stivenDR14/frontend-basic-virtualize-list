@@ -11,6 +11,7 @@ import { Rating } from "../models";
 import CardGenericComponent from "./card-generic.component";
 import { useVirtualize } from "../hooks/virtualize.hook";
 import { virtualizedListLabels } from "../utils/labels";
+import { useListGradient } from "../hooks/list-gradent.hook";
 
 export const VirtualizedList = () => {
   const [ratings, setRatings] = useState<Rating[]>([]);
@@ -26,6 +27,8 @@ export const VirtualizedList = () => {
       items: ratings,
       itemHeight,
     });
+
+  const { showTopGradient, showBottomGradient } = useListGradient();
 
   useEffect(() => {
     ratingsService
@@ -78,18 +81,32 @@ export const VirtualizedList = () => {
         {virtualizedListLabels.reviews}
       </Typography>
       <Box
+        className="virtualized-container"
         sx={{
           height: "100%",
           overflow: "auto",
-          scrollBehavior: "smooth",
-          scrollbarWidth: "thin",
-          scrollbarColor: "rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1)",
           width: "100%",
           maxWidth: 800,
-          p: 2,
+          p: 4,
+          position: "relative",
         }}
         ref={containerRef}
       >
+        <Box
+          sx={{
+            position: "sticky",
+            top: "-32px",
+            left: 0,
+            right: 0,
+            height: "60px",
+            background:
+              "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)",
+            zIndex: 2,
+            display: showTopGradient ? "block" : "none",
+            transition: "opacity 0.3s ease",
+            pointerEvents: "none",
+          }}
+        />
         <Box sx={{ height: `${totalHeight}px`, position: "relative" }}>
           {visibleItems.map((rating, index) => {
             const itemIndex = getItemIndex(rating);
@@ -131,12 +148,30 @@ export const VirtualizedList = () => {
                     >
                       {new Date(rating.review_date).toLocaleDateString()}
                     </Typography>
+                    <a href={rating.url} target="_blank">
+                      {virtualizedListLabels.link}
+                    </a>
                   </Box>
                 </CardGenericComponent>
               </Box>
             );
           })}
         </Box>
+        <Box
+          sx={{
+            position: "sticky",
+            bottom: "-32px",
+            left: 0,
+            right: 0,
+            height: "60px",
+            background:
+              "linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)",
+            zIndex: 2,
+            display: showBottomGradient ? "block" : "none",
+            transition: "opacity 0.3s ease",
+            pointerEvents: "none",
+          }}
+        />
       </Box>
     </Box>
   );

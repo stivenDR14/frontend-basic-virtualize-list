@@ -23,10 +23,6 @@ export function useVirtualize<T>({
 
   const handleScroll = useCallback(() => {
     if (containerRef.current) {
-      console.log(
-        "containerRef.current.scrollTop",
-        containerRef.current.scrollTop
-      );
       setScrollTop(containerRef.current.scrollTop);
     }
   }, []);

@@ -10,7 +10,11 @@ export const ratingsService = {
       if (ratings) {
         return JSON.parse(ratings);
       } else {
-        const response = await axios.get(import.meta.env.VITE_API_URL);
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_API_URL
+          }?type=json_records&sql=select * from csvgetter limit 2000`
+        );
         if (!response) {
           throw new Error(errorMessages.errorEndpoint);
         }

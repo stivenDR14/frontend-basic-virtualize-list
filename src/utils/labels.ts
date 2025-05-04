@@ -5,6 +5,7 @@ export const loginLabels = {
   password: "Contraseña",
   button: "Iniciar sesión",
   loading: "Iniciando sesión...",
+  logoutSuccess: "Sesión cerrada con éxito",
 };
 
 export const errorMessages = {
@@ -17,6 +18,7 @@ export const errorMessages = {
   mockTokenWrongError:
     "Hubo un error validando el token, debes volver a iniciar sesión",
   errorEndpoint: "Hubo un error al obtener los datos, intenta de nuevo",
+  logoutError: "Hubo un error al cerrar sesión, intenta de nuevo",
 };
 
 export const successMessages = {
@@ -39,4 +41,5 @@ export const logoutButtonLabels = {
 export const virtualizedListLabels = {
   reviews: "Puntuaciones de productos",
   by: "Por: ",
+  link: "Ver en Amazon",
 };
