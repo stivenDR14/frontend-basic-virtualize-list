@@ -55,12 +55,9 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
     }
 
     if (isValid) {
-      // Si hay una función onSubmit personalizada, la llamamos
       if (onSubmit) {
         onSubmit(email, password);
       }
-
-      // Llamamos a la función de login del hook
       await login(email, password);
     }
   };
@@ -159,7 +156,6 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           {isLoading ? loginLabels.loading : loginLabels.button}
         </Button>
 
-        {/* Mostramos el mensaje de error del formulario si existe */}
         {error && !isLoading && (
           <Typography color="error" variant="body2" align="center">
             {error}

@@ -11,6 +11,7 @@ import { SnackbarComponent } from "../components/snackbar.component";
 import { AlertColor } from "@mui/material";
 import { authService } from "../services/auth.services";
 import { LoadingFallback } from "../components/loading-fallback.component";
+import axios, { AxiosRequestHeaders } from "axios";
 
 export type AppContextInterface = {
   authData: string;
@@ -45,6 +46,7 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>("info");
+  const [interceptorLayer, setInterceptorLayer] = useState<number>();
 
   const handleCloseSnackbar = (
     event?: SyntheticEvent | Event,
@@ -68,6 +70,33 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
     setAuthData(token);
   };
 
+  const handleSetInterceptorLayer = useCallback(() => {
+    if (interceptorLayer !== undefined) {
+      axios.interceptors.request.eject(interceptorLayer);
+    }
+
+    const myInterceptor = axios.interceptors.request.use(
+      (config) => {
+        const apiUrl = import.meta.env.VITE_API_URL;
+
+        console.log("config.url", config.url);
+        console.log("apiUrl", apiUrl);
+        if (config.url && config.url.startsWith(apiUrl)) {
+          config.headers = {
+            ...config.headers,
+            Authentication: `Bearer ${authData}`,
+          } as unknown as AxiosRequestHeaders;
+        }
+
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+    setInterceptorLayer(myInterceptor);
+  }, [authData]);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log("token", token);
@@ -88,6 +117,10 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({
       setIsLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    handleSetInterceptorLayer();
+  }, [authData]);
 
   const value = {
     authData,

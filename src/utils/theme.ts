@@ -91,41 +91,41 @@ const typografyTheme = {
     MuiCssBaseline: {
       styleOverrides: `
 
-      @font-face: {
-        fontFamily: "SignikaNegative",
-        fontWeight: 400,
-        fontStyle: "normal",
-        src: url(${SignikaNegativeRegular}),
-      },
-      @font-face: {
-        fontFamily: "SignikaNegative",
-        fontWeight: 700,
-        fontStyle: "normal",
-        src: url(${SignikaNegativeBold}),
-      },
-      @font-face: {
-        fontFamily: "SignikaNegative",
-        fontWeight: 600,
-        fontStyle: "normal",
-        src: url(${SignikaNegativeSemiBold}),
-      },
-      @font-face: {
-        fontFamily: "SignikaNegative",
-        fontWeight: 600,
-        fontStyle: "normal",
-        src: url(${SignikaNegativeMedium}),
-      },
-      @font-face: {
-        fontFamily: "SignikaNegative",
-        fontWeight: 300,
-        fontStyle: "normal",
-        src: url(${SignikaNegativeLight}),
-      },
-      @font-face: {
-        fontFamily: "SignikaNegative",
-        fontWeight: 200,
-        fontStyle: "normal",
-        src: url(${SignikaNegativeLight})
+      @font-face {
+        font-family: SignikaNegative;
+        font-weight: 400;
+        font-style: normal;
+        src: url(${SignikaNegativeRegular})  format("truetype");
+      }
+      @font-face {
+        font-family: SignikaNegative;
+        font-weight: 700;
+        font-style: normal;
+        src: url(${SignikaNegativeBold})  format("truetype");
+      }
+      @font-face {
+        font-family: SignikaNegative;
+        font-weight: 600;
+        font-style: normal;
+        src: url(${SignikaNegativeSemiBold})  format("truetype");
+      }
+      @font-face {
+        font-family: SignikaNegative;
+        font-weight: 600;
+        font-style: normal;
+        src: url(${SignikaNegativeMedium})  format("truetype");
+      }
+      @font-face {
+        font-family: SignikaNegative;
+        font-weight: 300;
+        font-style: normal;
+        src: url(${SignikaNegativeLight})  format("truetype");
+      }
+      @font-face {
+        font-family: SignikaNegative;
+        font-weight: 200;
+        font-style: normal;
+        src: url(${SignikaNegativeLight})  format("truetype");
       }
       `,
     },
@@ -136,11 +136,10 @@ export const customTheme = createTheme({
   palette: {
     primary: {
       main: "#353535",
-      light: "#284B63",
       contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#3C6E71",
+      main: "#284B63",
       contrastText: "#FFFFFF",
     },
     background: {

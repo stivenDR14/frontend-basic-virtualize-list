@@ -11,7 +11,7 @@ export default function LogoutButtonComponent() {
       sx={{
         position: "fixed",
         top: 16,
-        right: 16,
+        left: 16,
         zIndex: 1100,
       }}
     >
