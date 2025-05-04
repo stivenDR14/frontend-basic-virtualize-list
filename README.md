@@ -199,24 +199,3 @@ La solución de virtualización incluye:
 - Implementar propiedades de código en las respuestas de API para manejar diferentes estados en la UI.
 
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const englishSection = document.getElementById('english');
-  const spanishSection = document.getElementById('spanish');
-  const enBtn = document.getElementById('en-btn');
-  const esBtn = document.getElementById('es-btn');
-  
-  enBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    englishSection.style.display = 'block';
-    spanishSection.style.display = 'none';
-  });
-  
-  esBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    englishSection.style.display = 'none';
-    spanishSection.style.display = 'block';
-  });
-});
-</script>
