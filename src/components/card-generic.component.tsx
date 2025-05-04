@@ -32,7 +32,7 @@ const CardGenericComponent: FC<CardGenericProps> = ({
       >
         <Box
           sx={{
-            width: isMdUp ? "33%" : "25%",
+            width: "33%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -46,7 +46,7 @@ const CardGenericComponent: FC<CardGenericProps> = ({
         </Box>
         <Box
           sx={{
-            width: isMdUp ? "67%" : "75%",
+            width: "67%",
             display: "flex",
             flexDirection: "column",
             overflow: "auto",
